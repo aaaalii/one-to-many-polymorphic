@@ -13,4 +13,24 @@ class Video extends Model
     public function comments(){
         return $this->morphMany(Comment::class, 'comment'); // second param, name of the function which makes the Comments table as morphTo();
     }
+
+    public function latestComment(){
+        return $this->morphOne(Comment::class, 'comment')
+                    ->latestOfMany();
+    }
+
+    public function oldestComment(){
+        return $this->morphOne(Comment::class, 'comment')
+                    ->oldestOfMany();
+    }
+
+    public function bestComment(){
+        return $this->morphOne(Comment::class, 'comment')
+                    ->ofMany('likes', 'max');
+    }
+
+    public function leastLikedComment(){
+        return $this->morphOne(Comment::class, 'comment')
+                    ->ofMany('likes', 'min');
+    }
 }

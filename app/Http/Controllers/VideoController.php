@@ -12,7 +12,13 @@ class VideoController extends Controller
      */
     public function index()
     {
-        $video = Video::with('comments')->get();
+        // $video = Video::with('comments')->get();
+
+        // return $video;
+
+        //--------------one of many polymorphic-------------------
+
+        $video = Video::with('bestComment')->find(2);
 
         return $video;
     }
